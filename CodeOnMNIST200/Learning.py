@@ -57,8 +57,7 @@ class Tempotron(object):
         np.random.seed(self._seed)
         self._Weights = self._weight_variance * np.random.randn\
             (self._n_in, self._n_class, self._n_neuron_per_class) + self._weight_offset
-#	print self._Weights[200][1][0:9]
-        # np.random.randn生成0为均值，1为标准差的正态分布。这里是生成均值为weight_offset,标准差为weight_variance的权重
+
     def _is_single_tau(self):
         return not self._tau_m or self._tau_m <= 0
 
@@ -249,8 +248,8 @@ class Tempotron(object):
 
 
 '''
-SegmentAdaptiveTempotron: 继承与AdaptiveTempotron， 第四章学习算法
-func: _update_weights: 用于更新权重
+SPA: 继承与Tempotron
+func: _update_weights: 用于SPA更新权重
 '''
 class SPA(Tempotron):
     def __init__(self, tau, tau_m, n_in, n_class, n_neuron_per_class,

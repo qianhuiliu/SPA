@@ -303,10 +303,9 @@ class SPA(Tempotron):
         while np.max(l_idx) < length:
             r_t = time[l_idx] + self._update_step
             for i in range(self._n_neuron_per_class):
-                ri = bisect.bisect_right(time, r_t[0, i])#查找r_t[0, i]将会插入time的位置并返回,当有重复值时插到右边
+                ri = bisect.bisect_right(time, r_t[0, i])
                 li = l_idx[0, i]
-                r_idx[:, i] = np.argmax(v[li:ri, :, i], axis=0) + li#argmax返回每列最大的数字对应的行编号,即每个神经元在第li到ri的输入事件下电压最大是什么时候
-                #r_idx表示在第li个事件到第ri个事件的刺激下，每个label的第i个分类神经元的电压最大是发生在第几个事件的刺激后
+                r_idx[:, i] = np.argmax(v[li:ri, :, i], axis=0) + li
 
             v_max = np.zeros((self._n_class, self._n_neuron_per_class), dtype=np.float32)
             for i in range(self._n_class):
